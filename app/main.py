@@ -14,6 +14,7 @@ from app.events.event_bus import event_bus
 from app.events import handlers
 
 from app.utils.logging_setup import setup_logging
+from app.plugins.plugin_manager import load_plugins
 
 setup_logging()
 app = FastAPI(
@@ -40,3 +41,5 @@ event_bus.subscribe("BlockedPeriodCreated", handlers.log_event)
 event_bus.subscribe("BlockedPeriodDeleted", handlers.log_event)
 event_bus.subscribe("PropertyCreated", handlers.log_event)
 event_bus.subscribe("PropertyDeleted", handlers.log_event)
+
+load_plugins()
