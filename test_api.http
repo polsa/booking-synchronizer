@@ -1,0 +1,26 @@
+### Create Booking
+POST http://127.0.0.1:8000/bookings/
+Content-Type: application/json
+
+{
+  "property_id": 1,
+  "guest_name": "Max Mustermann",
+  "guest_email": "max@example.com",
+  "guest_phone": "0123456789",
+  "number_of_guests": 2,
+  "special_requests": "Late check-in",
+  "check_in_date": "2025-06-20",
+  "check_out_date": "2025-06-25",
+  "income": 500.0,
+  "fees": 50.0,
+  "notes": "VIP Guest"
+}
+
+### List Bookings
+GET http://127.0.0.1:8000/bookings/
+
+### Get Booking by ID
+GET http://127.0.0.1:8000/bookings/1
+
+### Delete Booking
+DELETE http://127.0.0.1:8000/bookings/1
