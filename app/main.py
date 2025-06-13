@@ -9,7 +9,7 @@
 from fastapi import FastAPI
 from app.models import Base, engine
 from app.models import property, booking, blocked_period
-from app.api import booking as booking_api, blocked_period as blocked_period_api
+from app.api import booking as booking_api, blocked_period as blocked_period_api, property as property_api
 app = FastAPI(
     title="Booking Synchronizer",
     version="0.1.0"
@@ -17,6 +17,8 @@ app = FastAPI(
 
 app.include_router(booking_api.router)
 app.include_router(blocked_period_api.router)
+app.include_router(property_api.router)
+
 
 # Initialize DB
 Base.metadata.create_all(bind=engine)
