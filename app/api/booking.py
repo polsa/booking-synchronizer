@@ -13,6 +13,8 @@ from app.models import booking as booking_model
 from app.models import SessionLocal
 from app.schemas import booking as booking_schema
 
+from app.events.event_bus import event_bus
+
 router = APIRouter(prefix="/bookings", tags=["bookings"])
 
 # Dependency → DB Session bereitstellen
@@ -29,6 +31,7 @@ def create_booking(booking: booking_schema.BookingCreate, db: Session = Depends(
     db_booking = booking_model.Booking(**booking.dict())
     db.add(db_booking)
     db.commit()
+    event_bus.publish("BookingCreated", db_booking.id)
     db.refresh(db_booking)
     return db_booking
 
@@ -53,4 +56,5 @@ def delete_booking(booking_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Booking not found")
     db.delete(db_booking)
     db.commit()
+    event_bus.publish("BookingDeleted", booking_id)
     return {"ok": True}

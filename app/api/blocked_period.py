@@ -13,6 +13,8 @@ from app.models import blocked_period as blocked_period_model
 from app.models import SessionLocal
 from app.schemas import blocked_period as blocked_period_schema
 
+from app.events.event_bus import event_bus
+
 router = APIRouter(prefix="/blocked_periods", tags=["blocked_periods"])
 
 # Dependency → DB Session bereitstellen
@@ -29,6 +31,7 @@ def create_blocked_period(blocked_period: blocked_period_schema.BlockedPeriodCre
     db_blocked_period = blocked_period_model.BlockedPeriod(**blocked_period.dict())
     db.add(db_blocked_period)
     db.commit()
+    event_bus.publish("BookingCreated", db_blocked_period.id)
     db.refresh(db_blocked_period)
     return db_blocked_period
 
@@ -53,4 +56,5 @@ def delete_blocked_period(blocked_period_id: int, db: Session = Depends(get_db))
         raise HTTPException(status_code=404, detail="BlockedPeriod not found")
     db.delete(db_blocked_period)
     db.commit()
+    event_bus.publish("BlockedPerionDeleted", blocked_period_id)
     return {"ok": True}
