@@ -9,3 +9,4 @@ __pycache__/
 *.sqlite3
 *.db
 booking_sync.db
+venv3.12/

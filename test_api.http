@@ -23,4 +23,4 @@ GET http://127.0.0.1:8000/bookings/
 GET http://127.0.0.1:8000/bookings/1
 
 ### Delete Booking
-DELETE http://127.0.0.1:8000/bookings/1
+DELETE http://127.0.0.1:8000/bookings/2

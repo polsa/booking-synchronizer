@@ -12,3 +12,4 @@ passlib[bcrypt]
 python-multipart
 pytest
 httpx
+pydantic-settings

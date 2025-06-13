@@ -5,7 +5,7 @@
 # File: settings.py
 # Desc: Application configuration settings
 
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     app_name: str = "Booking Synchronizer"
