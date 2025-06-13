@@ -19,4 +19,10 @@ class Booking(Base):
     guest_phone = Column(String, nullable=True)
     number_of_guests = Column(Integer, nullable=True)
     special_requests = Column(String, nullable=True)
-    check_in_date = Colum
+    check_in_date = Column(Date, nullable=False)
+    check_out_date = Column(Date, nullable=False)
+    income = Column(Float, nullable=True)
+    fees = Column(Float, nullable=True)
+    notes = Column(String, nullable=True)
+
+    property = relationship("Property")
